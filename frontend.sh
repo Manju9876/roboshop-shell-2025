@@ -17,6 +17,7 @@ echo -e "\e[31m>>>>>>>>>>>>>>> dsiable nginx <<<<<<<<<<<<<<<<\e[0m"
 cp /home/ec2-user/roboshop-shell-2025/nginx.conf /etc/nginx/nginx.conf
 
 echo -e "\e[31m>>>>>>>>>>>>>>> unzip code <<<<<<<<<<<<<<<<\e[0m"
+rm -rf /usr/share/nginx/html
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 
