@@ -39,4 +39,4 @@ echo -e "\e[31m>>>>>>>>>>>>> install mongodb <<<<<<<<<<<<<<\e[0m"
 dnf install mongodb-mongosh -y
 
 echo -e "\e[31m>>>>>>>>>>>>> connect to schema <<<<<<<<<<<<<<\e[0m"
-mongosh --host mongodb.devopsbymanju.shop </app/db/master-data.js
+mongosh --host mongodb-dev.devopsbymanju.shop </app/db/master-data.js
