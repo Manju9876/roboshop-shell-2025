@@ -33,7 +33,7 @@ systemctl enable catalogue
 systemctl start catalogue
 
 echo -e "\e[31m>>>>>>>>>>>>> copy mongod repo from mongo.repo <<<<<<<<<<<<<<\e[0m"
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/ec2-user/roboshop-shell-2025/mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[31m>>>>>>>>>>>>> install mongodb <<<<<<<<<<<<<<\e[0m"
 dnf install mongodb-mongosh -y
