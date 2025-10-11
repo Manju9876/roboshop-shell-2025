@@ -8,16 +8,16 @@ echo -e "\e[31m>>>>>>>>>>>>>>> install nginx <<<<<<<<<<<<<<<<\e[0m"
 dnf install nginx -y
 
 echo -e "\e[31m>>>>>>>>>>>>>>> remove Nginx data <<<<<<<<<<<<<<<<\e[0m"
+mkdir -p /usr/share/nginx/html
 rm -rf /usr/share/nginx/html/*
 
 echo -e "\e[31m>>>>>>>>>>>>>>> Download frontend code <<<<<<<<<<<<<<<<\e[0m"
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
 
-echo -e "\e[31m>>>>>>>>>>>>>>> dsiable nginx <<<<<<<<<<<<<<<<\e[0m"
+echo -e "\e[31m>>>>>>>>>>>>>>> copy nginx configuration file <<<<<<<<<<<<<<<<\e[0m"
 cp /home/ec2-user/roboshop-shell-2025/nginx.conf /etc/nginx/nginx.conf
 
 echo -e "\e[31m>>>>>>>>>>>>>>> unzip code <<<<<<<<<<<<<<<<\e[0m"
-rm -rf /usr/share/nginx/html
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 
