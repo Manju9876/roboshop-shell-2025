@@ -17,15 +17,18 @@ mkdir /app
 echo -e "\e[31m>>>>>>>>>>>>> download application code <<<<<<<<<<<<<<\e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
 
-echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
-cp catalogue.service /etc/systemd/system/catalogue.service
-cd /app
+#echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
+#cp catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e "\e[31m>>>>>>>>>>>>> unzip application code <<<<<<<<<<<<<<\e[0m"
+cd /app
 unzip /tmp/catalogue.zip
 
 echo -e "\e[31m>>>>>>>>>>>>> install Node js dependencies <<<<<<<<<<<<<<\e[0m"
 npm install
+
+echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
+cp /home/ec2-user/roboshop-shell-2025/catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e "\e[31m>>>>>>>>>>>>> reload and start catalogue service  <<<<<<<<<<<<<<\e[0m"
 systemctl daemon-reload
