@@ -28,5 +28,5 @@ npm install
 
 echo -e "\e[31m>>>>>>>>>>>>> reload service, enable and start nodejs <<<<<<<<<<<<<<\e[0m"
 systemctl daemon-reload
-systemctl enable catalogue
-systemctl start catalogue
+systemctl enable user.service
+systemctl start user.service
