@@ -9,7 +9,11 @@ dnf install redis -y
 
 echo -e "\e[31m>>>>>>>>>>>>>> change localhost to 0.0.0.0 in redis.conf <<<<<<<<<<<<<<<<\e[0m"
 #need to edit conf file
-
+#sed -i -e 's|127.0.0.1|0.0.0.0|' /etc/redis/redis.conf -e 's|protected-mode yes|protected-mode no|' /etc/redis/redis.conf
+sed -i '87s|127.0.0.1|0.0.0.0|' /etc/redis/redis.conf
 echo -e "\e[31m>>>>>>>>>>>>>> enable and start redis <<<<<<<<<<<<<<<<\e[0m"
 systemctl enable redis
-systemctl restart redis
+systemctl start redis
+
+
+
