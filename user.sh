@@ -11,6 +11,7 @@ echo -e "\e[31m>>>>>>>>>>>>> Add roboshop user <<<<<<<<<<<<<<\e[0m"
 useradd roboshop
 
 echo -e "\e[31m>>>>>>>>>>>>> Create a directory  <<<<<<<<<<<<<<\e[0m"
+rm -rf /app
 mkdir /app
 
 echo -e "\e[31m>>>>>>>>>>>>> Download application code <<<<<<<<<<<<<<\e[0m"
