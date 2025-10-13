@@ -12,4 +12,4 @@ rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
 echo -e "\e[31m>>>>>>>>>>>>> enable and start rabbitMQ <<<<<<<<<<<<<<<\e[0m"
 systemctl enable rabbitmq-server
-systemctl start rabbitmq-server
+systemctl restart rabbitmq-server
