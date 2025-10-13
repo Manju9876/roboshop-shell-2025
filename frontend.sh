@@ -30,11 +30,6 @@ echo -e "\e[31m>>>>>>>>>>>>>>> Restart Nginx <<<<<<<<<<<<<<<<\e[0m"
 systemctl restart nginx
 
 
-echo -e "\e[32m>>>>>>>><<<<<<<<\e[0m"
-dnf module disable mysql -y
-cp /home/ec2-user/roboshop-shell-2025/mysql.repo /etc/yum.repo.d/mysql.repo
-sudo dnf module enable mysql:5.7 -y
-sudo dnf install mysql-server -y
 
 
 
