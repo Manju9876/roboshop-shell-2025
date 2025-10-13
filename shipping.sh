@@ -30,11 +30,15 @@ systemctl daemon-reload
 
 echo -e "\e[31m>>>>>>>>>>>> enable and start shipping service <<<<<<<<<\e[0m"
 systemctl enable shipping
-systemctl restart shipping
+systemctl start shipping
 
+echo -e "\e[31m>>>>>>>>>>>> Install mysql <<<<<<<<<\e[0m"
 dnf install mysql -y
+
+echo -e "\e[31m>>>>>>>>>>>> connect schemas to the root and with password <<<<<<<<<\e[0m"
 mysql -h mysql.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/schema.sql
 mysql -h mysql.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
 mysql -h mysql.devopsbymanju.shop-uroot -pRoboShop@1 < /app/db/master-data.sql
 
+echo -e "\e[31m>>>>>>>>>>>> restart shipping service <<<<<<<<<\e[0m"
 systemctl restart shipping
