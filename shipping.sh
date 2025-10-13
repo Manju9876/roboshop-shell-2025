@@ -38,9 +38,9 @@ echo -e "\e[31m>>>>>>>>>>>> Install mysql <<<<<<<<<\e[0m"
 dnf install mysql -y
 
 echo -e "\e[31m>>>>>>>>>>>> connect schemas to the root and with password <<<<<<<<<\e[0m"
-mysql -h mysql.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/schema.sql
-mysql -h mysql.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
-mysql -h mysql.devopsbymanju.shop-uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h mysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/schema.sql
+mysql -h mysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
+mysql -h mmysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 echo -e "\e[31m>>>>>>>>>>>> restart shipping service <<<<<<<<<\e[0m"
 systemctl enable shipping
