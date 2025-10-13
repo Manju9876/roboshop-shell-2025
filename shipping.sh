@@ -1,3 +1,5 @@
+
+
 echo -e "\e[31m>>>>>>>>>>>> Install maven <<<<<<<<<\e[0m"
 dnf install maven -y
 
