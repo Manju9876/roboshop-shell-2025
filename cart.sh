@@ -30,6 +30,6 @@ npm install
 echo -e "\e[31m>>>>>>>>>>>>> Daemon reload <<<<<<<<<<<<\e[0m"
 systemctl daemon-reload
 
-echo -e "\e[31m>>>>>>>>>>>>>enable and restart catalogue service <<<<<<<<<<<<\e[0m"
-systemctl enable catalogue
-systemctl restart catalogue
+echo -e "\e[31m>>>>>>>>>>>>>enable and restart cart service <<<<<<<<<<<<\e[0m"
+systemctl enable cart
+systemctl restart cart
