@@ -23,7 +23,7 @@ cd /app
 mvn clean package
 
 echo -e "\e[31m>>>>>>>>>>>> move  <<<<<<<<<\e[0m"
-mv /home/ec2-user/roboshop-shell-2025/app/target/shipping-1.0.jar shipping.jar
+mv /app/target/shipping-1.0.jar shipping.jar
 
 echo -e "\e[31m>>>>>>>>>>>> Daemon reload <<<<<<<<<\e[0m"
 systemctl daemon-reload
