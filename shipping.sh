@@ -18,7 +18,7 @@ echo -e "\e[31m>>>>>>>>>>>> change to app directory and unzip code <<<<<<<<<\e[0
 cd /app
 unzip /tmp/shipping.zip
 
-echo -e "\e[31m>>>>>>>>>>>> install maven dependencies <<<<<<<<<\e[0m"
+echo -e "\e[31m>>>>>>>>>>>> Download maven dependencies <<<<<<<<<\e[0m"
 cd /app
 mvn clean package
 
