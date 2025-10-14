@@ -1,8 +1,10 @@
+source common.sh
+
 echo -e "\e[31m>>>>>>>>>>>>> Install Python <<<<<<<<<<<<<<<\e[0m"
 dnf install python3 gcc python3-devel -y
 
 echo -e "\e[31m>>>>>>>>>>>>> create app user  <<<<<<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m>>>>>>>>>>>>> create a directory <<<<<<<<<<<<<<<\e[0m"
 rm -rf /app

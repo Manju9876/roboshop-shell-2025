@@ -1,3 +1,5 @@
+source common.sh
+
 echo -e "\e[31m>>>>>>>>>>>>> Disable nodejs <<<<<<<<<<<<\e[0m"
 dnf module disable nodejs -y
 
@@ -8,7 +10,7 @@ echo -e "\e[31m>>>>>>>>>>>>> Install nodejs <<<<<<<<<<<<\e[0m"
 dnf install nodejs -y
 
 echo -e "\e[31m>>>>>>>>>>>>> create user <<<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m>>>>>>>>>>>>> Create a directory <<<<<<<<<<<<\e[0m"
 rm -rf /app

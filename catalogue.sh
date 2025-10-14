@@ -8,7 +8,7 @@ echo -e "\e[31m>>>>>>>>>>>>> install Node js <<<<<<<<<<<<<<\e[0m"
 dnf install nodejs -y
 
 echo -e "\e[31m>>>>>>>>>>>>> create application user <<<<<<<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m>>>>>>>>>>>>> create a directory <<<<<<<<<<<<<<\e[0m"
 rm -rf /app

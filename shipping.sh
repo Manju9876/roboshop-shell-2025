@@ -1,10 +1,10 @@
-
+source common.sh
 
 echo -e "\e[31m>>>>>>>>>>>> Install maven <<<<<<<<<\e[0m"
 dnf install maven -y
 
 echo -e "\e[31m>>>>>>>>>>>> create roboshop user <<<<<<<<<\e[0m"
-useradd roboshop
+useradd ${app_user}
 
 echo -e "\e[31m>>>>>>>>>>>> create app directory <<<<<<<<<\e[0m"
 rm -rf /app
