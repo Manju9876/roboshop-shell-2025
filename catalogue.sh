@@ -1,9 +1,10 @@
 
 script_path=$(dirname $0)
 source ${script_path}/common.sh
+
+dirname $0
 echo $app_user
 
-pwd
 exit
 
 echo -e "\e[31m>>>>>>>>>>>>> disable Node js <<<<<<<<<<<<<<\e[0m"
