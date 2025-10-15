@@ -1,5 +1,6 @@
-#script_path=$(dirname $0)
-#source ${script_path}/common.sh
+
+script_path=$(dirname $0)
+source ${script_path}/common.sh
 echo $0
 basename $0
 dirname $0
