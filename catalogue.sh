@@ -1,5 +1,6 @@
 source common.sh
 echo $0
+basename $0
 pwd
 exit
 
