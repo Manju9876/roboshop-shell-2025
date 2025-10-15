@@ -1,5 +1,5 @@
 source common.sh
-
+echo $0
 pwd
 exit
 
