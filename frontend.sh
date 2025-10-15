@@ -1,4 +1,4 @@
-script_path=$(dirname $0)
+script_path=$(dirname "$(realpath $0)")
 source ${script_path}/common.sh
 
 #dirname $0
