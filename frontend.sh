@@ -1,8 +1,8 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
 
-dirname $0
-exit
+#dirname $0
+#exit
 
 echo -e "\e[31m>>>>>>>>>>>>>>> dsiable nginx <<<<<<<<<<<<<<<<\e[0m"
 dnf module disable nginx -y
