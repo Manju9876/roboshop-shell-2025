@@ -35,7 +35,7 @@ echo -e "\e[31m>>>>>>>>>>>>> install Node js dependencies <<<<<<<<<<<<<<\e[0m"
 npm install
 
 echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/catalogue.service /etc/systemd/system/catalogue.service
+cp ${script_path}/catalogue.service /etc/systemd/system/catalogue.service
 
 echo -e "\e[31m>>>>>>>>>>>>> reload and start catalogue service  <<<<<<<<<<<<<<\e[0m"
 systemctl daemon-reload
@@ -43,7 +43,7 @@ systemctl enable catalogue
 systemctl start catalogue
 
 echo -e "\e[31m>>>>>>>>>>>>> copy mongod repo from mongo.repo <<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[31m>>>>>>>>>>>>> install mongodb <<<<<<<<<<<<<<\e[0m"
 dnf install mongodb-mongosh -y

@@ -24,7 +24,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 
 echo -e "\e[31m>>>>>>>>>>>>>>> copy nginx configuration file <<<<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/nginx.conf /etc/nginx/nginx.conf
+cp ${script_path}/nginx.conf /etc/nginx/nginx.conf
 
 echo -e "\e[31m>>>>>>>>>>>>>>> Restart Nginx <<<<<<<<<<<<<<<<\e[0m"
 systemctl restart nginx

@@ -1,5 +1,5 @@
 echo -e "\e[31m>>>>>>>>>>>>> copy repo file <<<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+cp ${script_path}/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 
 echo -e "\e[31m>>>>>>>>>>>>> Install rabbitMQ <<<<<<<<<<<<<<<\e[0m"
 dnf install rabbitmq-server -y

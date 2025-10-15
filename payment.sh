@@ -16,7 +16,7 @@ echo -e "\e[31m>>>>>>>>>>>>> download app content <<<<<<<<<<<<<<<\e[0m"
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
 
 echo -e "\e[31m>>>>>>>>>>>>> copy payment service file <<<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/payment.service /etc/systemd/system/payment.service
+cp ${script_path}/payment.service /etc/systemd/system/payment.service
 
 echo -e "\e[31m>>>>>>>>>>>>> navigate to /app and unzip app content <<<<<<<<<<<<<<<\e[0m"
 cd /app

@@ -22,7 +22,7 @@ echo -e "\e[31m>>>>>>>>>>>>> Download application code <<<<<<<<<<<<<<\e[0m"
 curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip
 
 echo -e "\e[31m>>>>>>>>>>>>> copy user.service file  <<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/user.service /etc/systemd/system/user.service
+cp ${script_path}/user.service /etc/systemd/system/user.service
 
 echo -e "\e[31m>>>>>>>>>>>>> move to /app and unzip content <<<<<<<<<<<<<<\e[0m"
 cd /app

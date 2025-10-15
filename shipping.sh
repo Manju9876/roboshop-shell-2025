@@ -26,7 +26,7 @@ echo -e "\e[31m>>>>>>>>>>>> move  <<<<<<<<<\e[0m"
 mv target/shipping-1.0.jar shipping.jar
 
 echo -e "\e[31m>>>>>>>>>>>> Copy shipping service file <<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}/shipping.service /etc/systemd/system/shipping.service
 
 echo -e "\e[31m>>>>>>>>>>>> Daemon reload <<<<<<<<<\e[0m"
 systemctl daemon-reload

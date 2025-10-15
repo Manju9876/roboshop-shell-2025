@@ -22,7 +22,7 @@ echo -e "\e[31m>>>>>>>>>>>>> Download application code <<<<<<<<<<<<\e[0m"
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
 
 echo -e "\e[31m>>>>>>>>>>>>> Copy systemd file <<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/cart.service /etc/systemd/system/cart.service
+cp ${script_path}/cart.service /etc/systemd/system/cart.service
 
 echo -e "\e[31m>>>>>>>>>>>>> unzip application code in /app <<<<<<<<<<<<\e[0m"
 cd /app

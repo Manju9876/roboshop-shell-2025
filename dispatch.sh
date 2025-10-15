@@ -14,7 +14,7 @@ echo -e "\e[31m>>>>>>>>>>>>>Download app content<<<<<<<<<<<<<<\e[0m"
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip
 
 echo -e "\e[31m>>>>>>>>>>>>>copy dispatch service file <<<<<<<<<<<<<<\e[0m"
-cp /home/ec2-user/roboshop-shell-2025/dispatch.service /etc/systemd/system/dispatch.service
+cp ${script_path}/dispatch.service /etc/systemd/system/dispatch.service
 
 echo -e "\e[31m>>>>>>>>>>>>> navigate to /app and unzip the content <<<<<<<<<<<<<<\e[0m"
 cd /app

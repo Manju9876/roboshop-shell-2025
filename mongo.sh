@@ -1,5 +1,5 @@
 echo -e "\e[31m>>>>>>>>>>>>>>>> Copy repo file <<<<<<<<<<<<<<<<<<"
-cp /home/ec2-user/roboshop-shell-2025/mongo.repo /etc/yum.repos.d/mongo.repo
+cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
 
 echo -e "\e[31m>>>>>>>>>>>>>>>> install mongod <<<<<<<<<<<<<<<<<<"
 dnf install mongodb-org -y
