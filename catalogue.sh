@@ -1,9 +1,8 @@
 
 script_path=$(dirname $0)
 source ${script_path}/common.sh
-echo $0
-basename $0
-dirname $0
+echo $app_user
+
 pwd
 exit
 
