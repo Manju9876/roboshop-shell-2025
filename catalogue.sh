@@ -3,7 +3,6 @@ source ${script_path}/common.sh
 
 echo ${script_path}
 
-exit
 
 echo -e "\e[31m>>>>>>>>>>>>> disable Node js <<<<<<<<<<<<<<\e[0m"
 dnf module disable nodejs -y
