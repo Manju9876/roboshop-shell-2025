@@ -1,9 +1,9 @@
-script_path=$(dirname $0)
+script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
 
-#echo path=${script_path}
+echo ${script_path}
 
-#exit
+exit
 
 echo -e "\e[31m>>>>>>>>>>>>> disable Node js <<<<<<<<<<<<<<\e[0m"
 dnf module disable nodejs -y
