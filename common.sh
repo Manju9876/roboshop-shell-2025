@@ -1,8 +1,8 @@
 script=$(realpath $0)
 script_path=$(dirname "$script")
 
-script_path=$(dirname $(realpath $0))
-source ${script_path}/common.sh
+#script_path=$(dirname $(realpath $0))
+#source ${script_path}/common.sh
 app_user=roboshop
 
 func_nodejs(){
