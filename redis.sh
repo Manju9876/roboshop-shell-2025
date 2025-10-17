@@ -1,3 +1,6 @@
+script_path=$(dirname $(realpath $0))
+source ${script_path}/common.sh
+
 echo -e "\e[31m>>>>>>>>>>>>>> Disable redis <<<<<<<<<<<<<<<<\e[0m"
 dnf module disable redis -y
 
