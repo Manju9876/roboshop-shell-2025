@@ -4,41 +4,43 @@ script_path=$(dirname "$script")
 #script_path=$(dirname $(realpath $0))
 #source ${script_path}/common.sh
 app_user=roboshop
-
+print_head(){
+  echo -e "\e[32m>>>>>>>>>>>>> $* <<<<<<<<<<<<<<\e[0m"
+}
 func_nodejs(){
-  echo -e "\e[31m>>>>>>>>>>>>> disable Node js <<<<<<<<<<<<<<\e[0m"
+  print_head disable Node js
   dnf module disable nodejs -y
 
-  echo -e "\e[31m>>>>>>>>>>>>> enable Node js version 20 <<<<<<<<<<<<<<\e[0m"
+  print_head enable Node js version 20
   dnf module enable nodejs:20 -y
 
-  echo -e "\e[31m>>>>>>>>>>>>> install Node js <<<<<<<<<<<<<<\e[0m"
+  print_head install Node js
   dnf install nodejs -y
 
-  echo -e "\e[31m>>>>>>>>>>>>> create application user <<<<<<<<<<<<<<\e[0m"
+  print_head create application user
   useradd ${app_user}
 
-  echo -e "\e[31m>>>>>>>>>>>>> create a directory <<<<<<<<<<<<<<\e[0m"
+  print_head create a directory
   rm -rf /app
   mkdir /app
 
-  echo -e "\e[31m>>>>>>>>>>>>> download application code <<<<<<<<<<<<<<\e[0m"
+  print_head download application code
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip
 
-  #echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
+  #print_head copy catalogue service to systemd
   #cp catalogue.service /etc/systemd/system/catalogue.service
 
-  echo -e "\e[31m>>>>>>>>>>>>> unzip application code <<<<<<<<<<<<<<\e[0m"
+  print_head unzip application code
   cd /app
   unzip /tmp/${component}.zip
 
-  echo -e "\e[31m>>>>>>>>>>>>> install Node js dependencies <<<<<<<<<<<<<<\e[0m"
+  print_head install Node js dependencies
   npm install
 
-  echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
+  print_head copy catalogue service to systemd
   cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
 
-  echo -e "\e[31m>>>>>>>>>>>>> reload and start catalogue service  <<<<<<<<<<<<<<\e[0m"
+  print_head reload and start catalogue service
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl start ${component}
