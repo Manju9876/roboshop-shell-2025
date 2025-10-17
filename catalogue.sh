@@ -1,4 +1,4 @@
-script_path=$(dirname $(realpath ${BASH_SOURCE[0]}))
+script_path=$(dirname $(realpath "${BASH_SOURCE[0]}"))
 
 #script_path=$(dirname $(realpath $0))
 
