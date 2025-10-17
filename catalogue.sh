@@ -5,7 +5,7 @@ script_path=$(dirname $(realpath "${BASH_SOURCE[0]}"))
 #script=$(realpath $0)
 #script_path=$(dirname "$script")
 source ${script_path}/common.sh
-echo script_path
+echo ${cript_path}
 exit
 
 component=catalogue
