@@ -1,5 +1,6 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
+mysql_root_password=$1
 
 echo -e "\e[31m>>>>>>>>>>>> Install maven <<<<<<<<<\e[0m"
 dnf install maven -y
@@ -39,9 +40,9 @@ echo -e "\e[31m>>>>>>>>>>>> Install mysql <<<<<<<<<\e[0m"
 dnf install mysql -y
 
 echo -e "\e[31m>>>>>>>>>>>> connect schemas to the root and with password <<<<<<<<<\e[0m"
-mysql -h mysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/schema.sql
-mysql -h mysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/app-user.sql
-mysql -h mysql-dev.devopsbymanju.shop -uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/schema.sql
+mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/app-user.sql
+mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/master-data.sql
 
 echo -e "\e[31m>>>>>>>>>>>> restart shipping service <<<<<<<<<\e[0m"
 systemctl enable shipping

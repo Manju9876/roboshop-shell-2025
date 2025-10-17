@@ -1,6 +1,6 @@
 script_path=$(dirname $0)
 source ${script_path}/common.sh
-
+rabbitmq_appuser_password=$1
 
 echo -e "\e[31m>>>>>>>>>>>>> Install Python <<<<<<<<<<<<<<<\e[0m"
 dnf install python3 gcc python3-devel -y
@@ -16,6 +16,7 @@ echo -e "\e[31m>>>>>>>>>>>>> download app content <<<<<<<<<<<<<<<\e[0m"
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
 
 echo -e "\e[31m>>>>>>>>>>>>> copy payment service file <<<<<<<<<<<<<<<\e[0m"
+sed -i -e "s|rabbitmq_appuser_password|${rabbitmq_appuser_password}|" ${script_path}/payment.service
 cp ${script_path}/payment.service /etc/systemd/system/payment.service
 
 echo -e "\e[31m>>>>>>>>>>>>> navigate to /app and unzip app content <<<<<<<<<<<<<<<\e[0m"
