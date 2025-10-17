@@ -1,12 +1,6 @@
 script=$(realpath $0)
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
-echo ${script_path}
-echo "0 = $0"
-echo "realpath = $(realpath $0)"
-echo "dirname = $(dirname $(realpath $0))"
-echo user name=${app_user}
-exit
 
 #script_path=$(dirname $(realpath "$0"))
 #script_path=$(dirname $(realpath "${BASH_SOURCE[0]}"))
