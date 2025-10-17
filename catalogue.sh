@@ -1,5 +1,7 @@
 script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
+echo script_path
+exit
 
 component=catalogue
 
