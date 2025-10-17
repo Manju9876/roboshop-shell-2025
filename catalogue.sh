@@ -1,44 +1,9 @@
 script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
-#script_path=$(dirname $0)
-#source ${script_path}/common.sh
 
-echo -e "\e[31m>>>>>>>>>>>>> disable Node js <<<<<<<<<<<<<<\e[0m"
-dnf module disable nodejs -y
+component=catalogue
 
-echo -e "\e[31m>>>>>>>>>>>>> enable Node js version 20 <<<<<<<<<<<<<<\e[0m"
-dnf module enable nodejs:20 -y
-
-echo -e "\e[31m>>>>>>>>>>>>> install Node js <<<<<<<<<<<<<<\e[0m"
-dnf install nodejs -y
-
-echo -e "\e[31m>>>>>>>>>>>>> create application user <<<<<<<<<<<<<<\e[0m"
-useradd ${app_user}
-
-echo -e "\e[31m>>>>>>>>>>>>> create a directory <<<<<<<<<<<<<<\e[0m"
-rm -rf /app
-mkdir /app
-
-echo -e "\e[31m>>>>>>>>>>>>> download application code <<<<<<<<<<<<<<\e[0m"
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
-
-#echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
-#cp catalogue.service /etc/systemd/system/catalogue.service
-
-echo -e "\e[31m>>>>>>>>>>>>> unzip application code <<<<<<<<<<<<<<\e[0m"
-cd /app
-unzip /tmp/catalogue.zip
-
-echo -e "\e[31m>>>>>>>>>>>>> install Node js dependencies <<<<<<<<<<<<<<\e[0m"
-npm install
-
-echo -e "\e[31m>>>>>>>>>>>>> copy catalogue service to systemd <<<<<<<<<<<<<<\e[0m"
-cp ${script_path}/catalogue.service /etc/systemd/system/catalogue.service
-
-echo -e "\e[31m>>>>>>>>>>>>> reload and start catalogue service  <<<<<<<<<<<<<<\e[0m"
-systemctl daemon-reload
-systemctl enable catalogue
-systemctl start catalogue
+func_nodejs
 
 echo -e "\e[31m>>>>>>>>>>>>> copy mongod repo from mongo.repo <<<<<<<<<<<<<<\e[0m"
 cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
