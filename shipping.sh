@@ -2,6 +2,12 @@ script_path=$(dirname $0)
 source ${script_path}/common.sh
 mysql_root_password=$1
 
+if [ -z "$mysql_root_password" ]
+then
+  echo Input of Mysql root password is missing
+  exit
+fi
+
 echo -e "\e[31m>>>>>>>>>>>> Install maven <<<<<<<<<\e[0m"
 dnf install maven -y
 

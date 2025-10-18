@@ -2,6 +2,12 @@ script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
 rabbitmq_appuser_password=$1
 
+if [ -z "$rabbitmq_appuser_password" ]
+then
+  echo Input of rabbitmq appuser password is missing
+  exit
+fi
+
 echo -e "\e[31m>>>>>>>>>>>>> copy repo file <<<<<<<<<<<<<<<\e[0m"
 cp ${script_path}/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 

@@ -2,6 +2,12 @@ script_path=$(dirname $0)
 source ${script_path}/common.sh
 rabbitmq_appuser_password=$1
 
+if [ -z "$rabbitmq_appuser_password" ]
+then
+  echo Input of rabbitMQ passowrd is missing
+  exit
+fi
+
 echo -e "\e[31m>>>>>>>>>>>>> Install Python <<<<<<<<<<<<<<<\e[0m"
 dnf install python3 gcc python3-devel -y
 
