@@ -1,9 +1,8 @@
 script=$(realpath $0)
 script_path=$(dirname "$script")
 
-#script_path=$(dirname $(realpath $0))
-#source ${script_path}/common.sh
 app_user=roboshop
+
 func_print_head(){
   echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
 }
