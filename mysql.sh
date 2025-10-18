@@ -5,7 +5,7 @@ mysql_root_password=$1
 
 if [ -z "$mysql_root_password" ]
 then
-  echo func_print_head "Input  for mysql root password missing"
+  func_print_head "Input  for mysql root password missing"
   exit
 fi
 
