@@ -4,45 +4,60 @@ script_path=$(dirname "$script")
 #script_path=$(dirname $(realpath $0))
 #source ${script_path}/common.sh
 app_user=roboshop
-print_head(){
+func_print_head(){
   echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
 }
+
+func_schema_setup(){
+  echo -e "\e[31m>>>>>>>>>>>>> copy mongod repo from mongo.repo <<<<<<<<<<<<<<\e[0m"
+  cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo
+
+  echo -e "\e[31m>>>>>>>>>>>>> install mongodb <<<<<<<<<<<<<<\e[0m"
+  dnf install mongodb-mongosh -y
+
+  echo -e "\e[31m>>>>>>>>>>>>> connect to schema <<<<<<<<<<<<<<\e[0m"
+  mongosh --host mongodb-dev.devopsbymanju.shop </app/db/master-data.js
+
+}
+
 func_nodejs(){
-  print_head "disable Node js"
+  func_print_head "disable Node js"
   dnf module disable nodejs -y
 
-  print_head "enable Node js version 20"
+  func_print_head "enable Node js version 20"
   dnf module enable nodejs:20 -y
 
-  print_head "install Node js"
+  func_print_head "install Node js"
   dnf install nodejs -y
 
-  print_head "create application user"
+  func_print_head "create application user"
   useradd ${app_user}
 
-  print_head "create a directory"
+  func_print_head "create a directory"
   rm -rf /app
   mkdir /app
 
-  print_head "download application code"
+  func_print_head "download application code"
   curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip
 
   #print_head copy catalogue service to systemd
   #cp catalogue.service /etc/systemd/system/catalogue.service
 
-  print_head "unzip application code"
+  func_print_head "unzip application code"
   cd /app
   unzip /tmp/${component}.zip
 
-  print_head "install Node js dependencies"
+  func_print_head "install Node js dependencies"
   npm install
 
-  print_head "copy catalogue service to systemd"
+  func_print_head "copy catalogue service to systemd"
   cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
 
-  print_head "reload and start catalogue service"
+  func_print_head "reload and start catalogue service"
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl start ${component}
+
+  func_schema_setup
 
 }
