@@ -10,4 +10,5 @@ fi
 
 
 component=shipping
+schema_setup=mysql
 func_java
