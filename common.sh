@@ -119,6 +119,7 @@ func_java(){
  func_print_head "Moving shipping.jar file from target dir"
   mv target/${component}-1.0.jar ${component}.jar
  func_status_check $?
+
  func_schema_setup
 
  func_systemd_setup
