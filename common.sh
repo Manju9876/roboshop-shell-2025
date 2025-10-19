@@ -79,8 +79,6 @@ func_nodejs(){
 
   func_systemd_setup
 
-
-
 }
 
 func_java(){
