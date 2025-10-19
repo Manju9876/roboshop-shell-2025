@@ -4,9 +4,16 @@ script_path=$(dirname "$script")
 app_user=roboshop
 
 func_print_head(){
-  echo -e "\e[32m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
+  echo -e "\e[33m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
 }
 
+func_exit_status(){
+    if [ $? = 0 ]; then
+      echo -e "\e[32mSUCCESS\e[0m"
+    else
+      echo -e "\e[31mFAILURE\e[31m"
+    fi
+}
 func_schema_setup(){
   if [ "$schema_setup" == "mongo" ]; then
   func_print_head "Copy mongod repo from mongo.repo"
@@ -84,21 +91,19 @@ func_nodejs(){
 func_java(){
  func_print_head "Install maven"
   dnf install maven -y
+  func_exit_status
 
  func_app_prereq
 
  func_print_head "Download maven dependencies"
   cd /app
-  if [ $? = 0 ]; then
-    echo -e "\e[32mSUCCESS\e[0m"
-  else
-    echo -e "\e[31mFAILURE\e[31m"
-  fi
+  func_exit_status
   mvn clean package
+  func_exit_status
 
  func_print_head "Moving shipping.jar file from target dir"
   mv target/${component}-1.0.jar ${component}.jar
-
+  func_exit_status
  func_schema_setup
 
  func_systemd_setup
