@@ -10,3 +10,4 @@ fi
 
 
 component=shipping
+func_java
