@@ -4,7 +4,7 @@ script_path=$(dirname "$script")
 app_user=roboshop
 
 func_print_head(){
-  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
+  echo -e "\e[32m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
 }
 
 func_schema_setup(){
@@ -89,6 +89,11 @@ func_java(){
 
  func_print_head "Download maven dependencies"
   cd /app
+  if [ $? = 0 ]; then
+    echo -e "\e[32mSUCCESS\e[0m"
+  else
+    echo -e "\e[31mFAILURE\e[31m"
+  fi
   mvn clean package
 
  func_print_head "Moving shipping.jar file from target dir"
