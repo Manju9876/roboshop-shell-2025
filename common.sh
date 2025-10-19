@@ -61,3 +61,52 @@ func_nodejs(){
   func_schema_setup
 
 }
+
+func_java(){
+ func_print_head "Install maven"
+  dnf install maven -y
+
+ func_print_head "create roboshop user"
+  useradd ${app_user}
+
+ func_print_head "create app directory"
+  rm -rf /app
+  mkdir /app
+
+ func_print_head "Download App code"
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}-v3.zip
+
+ func_print_head "change to app directory and unzip code"
+  cd /app
+  unzip /tmp/${component}.zip
+
+ func_print_head "Download maven dependencies"
+  cd /app
+  mvn clean package
+
+ func_print_head "Moving shipping.jar file from target dir"
+  mv target/${component}-1.0.jar ${component}.jar
+
+ func_print_head "Copy shipping service file"
+  cp ${script_path}/${component}.service /etc/systemd/system/${component}.service
+
+ func_print_head Daemon reload
+  systemctl daemon-reload
+
+  #echo -e "\e[31m>>>>>>>>>>>> enable and start shipping service
+  #systemctl enable shipping
+  #systemctl restart shipping
+
+ func_print_head "Install mysql"
+  dnf install mysql -y
+
+ func_print_head "connect schemas to the root and with password"
+  mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/schema.sql
+  mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/app-user.sql
+  mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/master-data.sql
+
+ func_print_head "restart shipping service"
+  systemctl enable ${component}
+  systemctl restart ${component}
+
+}
