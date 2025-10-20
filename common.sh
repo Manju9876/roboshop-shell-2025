@@ -3,7 +3,7 @@ script_path=$(dirname "$script")
 
 app_user=roboshop
 log_file=/tmp/roboshop.log
-# rm -rf /tmp/roboshop.log
+rm -rf /tmp/roboshop.log
 
 func_print_head(){
 
@@ -22,6 +22,7 @@ func_status_check(){
       exit 1
     fi
 }
+
 func_schema_setup(){
 
   if [ "$schema_setup" == "mongo" ]; then
@@ -154,6 +155,27 @@ func_golang(){
     go mod init ${component} &>>${log_file}
     go get &>>${log_file}
     go build &>>${log_file}
+    func_status_check $?
+
+  func_systemd_setup
+
+}
+
+func_python(){
+
+  func_print_head "Install Python"
+    dnf install python3 gcc python3-devel -y &>>${log_file}
+    func_status_check $?
+
+  func_app_prereq
+
+  func_print_head "Download python dependencies" &>>${log_file}
+    pip3 install -r requirements.txt
+    func_status_check $?
+
+  func_print_head "Update the password in SystemD service file "
+    sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|" ${script_path}/${component}.service &>>${log_file}
+    sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}" ${script_path}/${component}.service &>>{log_file}
     func_status_check $?
 
   func_systemd_setup
