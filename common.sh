@@ -106,7 +106,7 @@ func_nodejs(){
 
 func_java(){
  func_print_head "Install maven"
-  dnf install maven -y
+  dnf install maven -y >/tmp/roboshop.log
   func_status_check $?
 
  func_app_prereq
