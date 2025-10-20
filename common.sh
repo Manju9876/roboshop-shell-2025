@@ -157,6 +157,12 @@ func_golang(){
     go build &>>${log_file}
     func_status_check $?
 
+  func_print_head "Update the password in SystemD service file "
+      sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|" ${script_path}/${component}.service &>>${log_file}
+      sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|" ${script_path}/${component}.service &>>{log_file}
+      func_status_check $?
+
+
   func_systemd_setup
 
 }
