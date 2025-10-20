@@ -7,8 +7,9 @@ log_file=/tmp/roboshop.log
 
 func_print_head(){
 
-  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
-  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m" &>>${log_file}
+  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<\e[0m"
+  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<\e[0m"  &>>${log_file}
+
 }
 
 func_status_check(){
@@ -40,6 +41,7 @@ func_schema_setup(){
   if [ "$schema_setup" == "mysql" ]; then
     func_print_head "Install Mysql Client"
       dnf install mysql -y &>>${log_file}
+      func_status_check $?
 
     func_print_head "connect schemas to the root and with password"
       mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/schema.sql &>>${log_file}
@@ -137,5 +139,25 @@ func_java(){
  func_schema_setup
 
  func_systemd_setup
+
+}
+
+func_golang(){
+  
+  func_print_head "Install golang"
+    dnf install golang -y &>>${log_file}
+    func_status_check $?
+
+   func_app_prereq
+  
+  func_print_headdownload "Download golang dependencies"
+    go mod init ${component} &>>${log_file}
+    func_status_check $?
+    go get &>>${log_file}
+    func_status_check $?
+    go build &>>${log_file}
+    func_status_check $?
+
+  func_systemd_setup
 
 }
