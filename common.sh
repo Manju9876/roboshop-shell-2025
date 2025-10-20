@@ -170,7 +170,7 @@ func_python(){
   func_app_prereq
 
   func_print_head "Download python dependencies" &>>${log_file}
-    pip3 install -r requirements.txt
+    pip3 install -r requirements.txt  &>>${log_file}
     func_status_check $?
 
   func_print_head "Update the password in SystemD service file "
