@@ -12,6 +12,7 @@ func_status_check(){
       echo -e "\e[32mSUCCESS\e[0m"
     else
       echo -e "\e[31mFAILURE\e[31m"
+      echo -e "\e[31mRefer the /tmp/roboshop.log  file for more information"
       exit 1
     fi
 }
