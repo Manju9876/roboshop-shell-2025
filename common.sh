@@ -150,7 +150,7 @@ func_golang(){
 
    func_app_prereq
   
-  func_print_headdownload "Download golang dependencies"
+  func_print_head "Download golang dependencies"
     go mod init ${component} &>>${log_file}
     func_status_check $?
     go get &>>${log_file}
