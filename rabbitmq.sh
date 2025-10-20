@@ -1,6 +1,6 @@
 script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
-rabbitmq_appuser_password=$1
+rabbitmq_app_users_password=$1
 
 if [ -z "$rabbitmq_appuser_password" ]
 then
@@ -15,7 +15,7 @@ echo -e "\e[31m>>>>>>>>>>>>> Install rabbitMQ <<<<<<<<<<<<<<<\e[0m"
 dnf install rabbitmq-server -y
 
 echo -e "\e[31m>>>>>>>>>>>>> add user and password <<<<<<<<<<<<<<<\e[0m"
-rabbitmqctl add_user roboshop ${rabbitmq_appuser_password}
+rabbitmqctl add_user roboshop ${rabbitmq_app_users_password}
 
 echo -e "\e[31m>>>>>>>>>>>>> set permissions <<<<<<<<<<<<<<<\e[0m"
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
