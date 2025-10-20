@@ -108,7 +108,7 @@ func_nodejs(){
 
 func_java(){
  func_print_head "Install maven"
-  dnf install maven -y &>>${log_file} $>>${log_file}
+  dnf install maven -y &>>${log_file}
   func_status_check $?
 
  func_app_prereq
