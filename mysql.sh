@@ -8,12 +8,15 @@ if [ -z "$mysql_root_password" ]; then
   exit
 fi
 
-echo -e "\e[31m>>>>>>>>>>>>>>>> install mysql <<<<<<<<<<<<<\e[0m"
-dnf install mysql-server -y
+func_print_head "install mysql"
+  dnf install mysql-server -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>>> enable and start mysql <<<<<<<<<<<<<\e[0m"
-systemctl enable mysqld
-systemctl start mysqld
+func_print_head "enable and start mysql"
+  systemctl enable mysqld &>>${log_file}
+  func_status_check $?
+  systemctl start mysqld &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>>> change default password to RoboShop@1 <<<<<<<<<<<<<\e[0m"
-mysql_secure_installation --set-root-pass ${mysql_root_password}
+func_print_head "Change default password"
+  mysql_secure_installation --set-root-pass ${mysql_root_password}

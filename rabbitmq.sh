@@ -1,25 +1,30 @@
 script_path=$(dirname $(realpath $0))
 source ${script_path}/common.sh
-rabbitmq_app_users_password=$1
+rabbitmq_app_username=$1
+rabbitmq_app_users_password=$2
 
-if [ -z "$rabbitmq_appuser_password" ]
-then
-  echo Input of rabbitmq appuser password is missing
-  exit
+if [ -z "${rabbitmq_app_username}" ] || [ "${rabbitmq_app_users_password}" ]; then
+   echo "❌ Input missing!"
+   echo "Usage: sudo bash script-name.sh <rabbitmq_app_username> <rabbitmq_app_users_password>"
+   exit 1
 fi
 
-echo -e "\e[31m>>>>>>>>>>>>> copy repo file <<<<<<<<<<<<<<<\e[0m"
-cp ${script_path}/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+func_print_head "copy repo file "
+cp ${script_path}/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>${log_file}
+func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>> Install rabbitMQ <<<<<<<<<<<<<<<\e[0m"
-dnf install rabbitmq-server -y
+func_print_head "Install rabbitMQ"
+dnf install rabbitmq-server -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>> add user and password <<<<<<<<<<<<<<<\e[0m"
-rabbitmqctl add_user roboshop ${rabbitmq_app_users_password}
+func_print_head "add user and password"
+  rabbitmqctl add_user ${rabbitmq_app_username} ${rabbitmq_app_users_password} &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>> set permissions <<<<<<<<<<<<<<<\e[0m"
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+func_print_head "set permissions"
+  rabbitmqctl set_permissions -p / ${rabbitmq_app_username} ".*" ".*" ".*" &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>> enable and start rabbitMQ <<<<<<<<<<<<<<<\e[0m"
-systemctl enable rabbitmq-server
-systemctl restart rabbitmq-server
+func_print_head "enable and start rabbitMQ"
+  systemctl enable rabbitmq-server &>>${log_file}
+  func_status_check $?systemctl restart rabbitmq-server &>>${log_file}

@@ -1,23 +1,29 @@
-script_path=$(dirname $(realpath $0))
+script=$(realpath $0)
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
-echo -e "\e[31m>>>>>>>>>>>>>> Disable redis <<<<<<<<<<<<<<<<\e[0m"
-dnf module disable redis -y
+func_print_head "Disable redis "
+  dnf module disable redis -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>> Enable redis version 7 <<<<<<<<<<<<<<<<\e[0m"
-dnf module enable redis:7 -y
+func_print_headEnable "redis version 7"
+  dnf module enable redis:7 -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>> Install redis <<<<<<<<<<<<<<<<\e[0m"
-dnf install redis -y
+func_print_head "Install redis"
+  dnf install redis -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>> change localhost to 0.0.0.0 in redis.conf <<<<<<<<<<<<<<<<\e[0m"
-sed -i '87s|127.0.0.1|0.0.0.0|' /etc/redis/redis.conf
-sed -i '111s|yes|no|' /etc/redis/redis.conf
+func_print_head "change localhost to 0.0.0.0 in redis.conf"
+  sed -i '87s|127.0.0.1|0.0.0.0|' /etc/redis/redis.conf &>>${log_file}
+  func_status_check $?
+  sed -i '111s|yes|no|' /etc/redis/redis.conf &>>${log_file}
+  func_status_check $?
 
-
-echo -e "\e[31m>>>>>>>>>>>>>> enable and start redis <<<<<<<<<<<<<<<<\e[0m"
-systemctl enable redis
-systemctl restart redis
-
+func_print_head "enable and start redis"
+  systemctl enable redis &>>${log_file}
+  func_status_check $?
+  systemctl restart redis &>>${log_file}
+  func_status_check $?
 
 
