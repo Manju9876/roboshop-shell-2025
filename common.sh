@@ -3,13 +3,16 @@ script_path=$(dirname "$script")
 
 app_user=roboshop
 log_file=/tmp/roboshop.log
+# rm -rf /tmp/roboshop.log
 
 func_print_head(){
+
   echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m"
   echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<\e[0m" &>>${log_file}
 }
 
 func_status_check(){
+
     if [ $1 = 0 ]; then
       echo -e "\e[32mSUCCESS\e[0m"
     else
@@ -19,6 +22,7 @@ func_status_check(){
     fi
 }
 func_schema_setup(){
+
   if [ "$schema_setup" == "mongo" ]; then
     func_print_head "Copy mongod repo from mongo.repo"
       cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo $>>${log_file}
@@ -46,8 +50,12 @@ func_schema_setup(){
 }
 
 func_app_prereq(){
+
    func_print_head "create Application  user"
-     useradd ${app_user} &>>${log_file}
+     id ${app_user} &>>${log_file}
+     if [ $? -ne 0 ]; then
+      useradd ${app_user} &>>${log_file}
+     fi
      func_status_check $?
 
    func_print_head "delete any existing /app dir and create app directory"
@@ -67,6 +75,7 @@ func_app_prereq(){
 }
 
 func_systemd_setup(){
+
    func_print_head "Copy service file"
      cp ${script_path}/${component}.service /etc/systemd/system/${component}.service $>>${log_file}
      func_status_check $?
@@ -83,6 +92,7 @@ func_systemd_setup(){
 }
 
 func_nodejs(){
+
   func_print_head "disable Node js"
   dnf module disable nodejs -y $>>${log_file}
   func_status_check $?
@@ -108,6 +118,7 @@ func_nodejs(){
 }
 
 func_java(){
+
  func_print_head "Install maven"
   dnf install maven -y &>>${log_file}
   func_status_check $?
