@@ -45,7 +45,7 @@ func_schema_setup(){
 
 func_app_prereq(){
    func_print_head "create Application  user"
-     useradd ${app_user} $>/tmp/roboshop.log
+     useradd ${app_user} &>/tmp/roboshop.log
      func_status_check $?
 
    func_print_head "delete any existing /app dir and create app directory"
@@ -107,7 +107,7 @@ func_nodejs(){
 
 func_java(){
  func_print_head "Install maven"
-  dnf install maven -y >/tmp/roboshop.log
+  dnf install maven -y $>/tmp/roboshop.log
   func_status_check $?
 
  func_app_prereq
