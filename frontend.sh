@@ -1,39 +1,44 @@
-script_path=$(dirname "$(realpath $0)")
+script=$(realpath $0)
+script_path=$(dirname "$script")
 source ${script_path}/common.sh
 
-#dirname $0
-#exit
 
-echo -e "\e[31m>>>>>>>>>>>>>>> dsiable nginx <<<<<<<<<<<<<<<<\e[0m"
-dnf module disable nginx -y
+func_print_head "Dsiable nginx"
+  dnf module disable nginx -y &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> Enable nginx version 1.24 <<<<<<<<<<<<<<<<\e[0m"
-dnf module enable nginx:1.24 -y
+func_print_head "Enable nginx version 1.24 "
+  dnf module enable nginx:1.24 -y  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> install nginx <<<<<<<<<<<<<<<<\e[0m"
-dnf install nginx -y
+func_print_head "install nginx "
+  dnf install nginx -y  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> start nginx service  <<<<<<<<<<<<<<<<\e[0m"
-systemctl enable nginx
-systemctl start nginx
+func_print_head "remove Nginx data "
+  rm -rf /usr/share/nginx/html/*  &>>${log_file}
+  func_status_check $?
 
+func_print_head "Download frontend code "
+  curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> remove Nginx data <<<<<<<<<<<<<<<<\e[0m"
-#mkdir -p /usr/share/nginx/html
-rm -rf /usr/share/nginx/html/*
+func_print_head "unzip code "
+  cd /usr/share/nginx/html  &>>${log_file}
+  func_status_check $?
+  unzip /tmp/frontend.zip  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> Download frontend code <<<<<<<<<<<<<<<<\e[0m"
-curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
+func_print_head "copy nginx configuration file "
+  cp ${script_path}/nginx.conf /etc/nginx/nginx.conf  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> unzip code <<<<<<<<<<<<<<<<\e[0m"
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip
+func_print_head "start nginx service "
+  systemctl enable nginx  &>>${log_file}
+  func_status_check $?
+  systemctl restart nginx  &>>${log_file}
+  func_status_check $?
 
-echo -e "\e[31m>>>>>>>>>>>>>>> copy nginx configuration file <<<<<<<<<<<<<<<<\e[0m"
-cp ${script_path}/nginx.conf /etc/nginx/nginx.conf
-
-echo -e "\e[31m>>>>>>>>>>>>>>> Restart Nginx <<<<<<<<<<<<<<<<\e[0m"
-systemctl restart nginx
 
 
 
