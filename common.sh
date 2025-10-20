@@ -152,9 +152,7 @@ func_golang(){
   
   func_print_head "Download golang dependencies"
     go mod init ${component} &>>${log_file}
-    func_status_check $?
     go get &>>${log_file}
-    func_status_check $?
     go build &>>${log_file}
     func_status_check $?
 
