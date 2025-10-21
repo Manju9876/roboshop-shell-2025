@@ -179,24 +179,13 @@ func_python(){
      pip3 install -r requirements.txt  &>>${log_file}
      func_status_check $?
 
-
-
     func_print_head "Update RabbitMQ credentials in SystemD service file"
-
-#    if  grep -q "rabbitmq_app_username" "${script_path}/${component}.service" && \
-#       grep -q "rabbitmq_app_users_password" "${script_path}/${component}.service"; then
-#
-#        sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|g" \
-#               -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|g" \
-#               "${script_path}/${component}.service" &>>${log_file}
-#        func_status_check $?
-#    else
-#        echo -e "\e[33m⚠️ Placeholders not found in ${component}.service, skipping replacement\e[0m" &>>${log_file}
-#    fi
-
-     sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|g" ${script_path}/${component}.service &>>${log_file}
-     sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|g" ${script_path}/${component}.service &>>${log_file}
-     func_status_check $?
+      sed -i -e "s|^Environment=AMQP_USER=.*|Environment=AMQP_USER=${rabbitmq_app_username}|" \
+             -e "s|^Environment=AMQP_PASS=.*|Environment=AMQP_PASS=${rabbitmq_app_users_password}|" \
+                 "${script_path}/${component}.service" &>>${log_file}
+#     sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|g" ${script_path}/${component}.service &>>${log_file}
+#     sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|g" ${script_path}/${component}.service &>>${log_file}
+             func_status_check $?
 
    func_systemd_setup
 
