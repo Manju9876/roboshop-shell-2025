@@ -19,7 +19,8 @@ dnf install rabbitmq-server -y &>>${log_file}
 
 func_print_head "enable and start rabbitMQ"
   systemctl enable rabbitmq-server &>>${log_file}
-  func_status_check $?systemctl restart rabbitmq-server &>>${log_file}
+  systemctl restart rabbitmq-server &>>${log_file}
+  func_status_check $?
 
 func_print_head "add user and password"
   rabbitmqctl add_user ${rabbitmq_app_username} ${rabbitmq_app_users_password} &>>${log_file}
