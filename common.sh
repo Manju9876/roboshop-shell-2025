@@ -159,7 +159,7 @@ func_golang(){
 
   func_print_head "Update the password in SystemD service file "
       sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|" ${script_path}/${component}.service &>>${log_file}
-      sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|" ${script_path}/${component}.service &>>{log_file}
+      sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|" ${script_path}/${component}.service &>>${log_file}
       func_status_check $?
 
 
@@ -169,21 +169,21 @@ func_golang(){
 
 func_python(){
 
-  func_print_head "Install Python"
-    dnf install python3 gcc python3-devel -y &>>${log_file}
-    func_status_check $?
+   func_print_head "Install Python"
+     dnf install python3 gcc python3-devel -y &>>${log_file}
+     func_status_check $?
 
-  func_app_prereq
+   func_app_prereq
 
-  func_print_head "Download python dependencies" &>>${log_file}
-    pip3 install -r requirements.txt  &>>${log_file}
-    func_status_check $?
+   func_print_head "Download python dependencies" &>>${log_file}
+     pip3 install -r requirements.txt  &>>${log_file}
+     func_status_check $?
 
-  func_print_head "Update the password in SystemD service file "
-    sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|" ${script_path}/${component}.service &>>${log_file}
-    sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|" ${script_path}/${component}.service &>>{log_file}
-    func_status_check $?
+   func_print_head "Update the password in SystemD service file "
+     sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|g" ${script_path}/${component}.service &>>${log_file}
+     sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|g" ${script_path}/${component}.service &>>${log_file}
+     func_status_check $?
 
-  func_systemd_setup
+   func_systemd_setup
 
-}
+ }
