@@ -6,7 +6,7 @@ func_print_head "Disable redis "
   dnf module disable redis -y &>>${log_file}
   func_status_check $?
 
-func_print_headEnable "redis version 7"
+func_print_head "Enable redis version 7"
   dnf module enable redis:7 -y &>>${log_file}
   func_status_check $?
 
