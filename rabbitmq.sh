@@ -23,7 +23,8 @@ func_print_head "enable and start rabbitMQ"
   func_status_check $?
 
 func_print_head "add user and password"
-  sudo rabbitmqctl list_users | grep roboshop
+  sudo rabbitmqctl list_users | grep roboshop &>>${log_file}
+  func_status_check
   if [ $? -ne 0 ]; then
     rabbitmqctl add_user ${rabbitmq_app_username} ${rabbitmq_app_users_password} &>>${log_file}
   fi
