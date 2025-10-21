@@ -9,6 +9,5 @@ if [ -z "${rabbitmq_app_username}" ] || [ -z "${rabbitmq_app_users_password}" ];
    exit 1
 fi
 
-
 component=payment
 func_python
