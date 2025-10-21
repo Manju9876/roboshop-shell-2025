@@ -3,7 +3,7 @@ source ${script_path}/common.sh
 rabbitmq_app_username=$1
 rabbitmq_app_users_password=$2
 
-if [ -z "${rabbitmq_app_username}" ] || [ "${rabbitmq_app_users_password}" ]; then
+if [ -z "${rabbitmq_app_username}" ] || [ -z "${rabbitmq_app_users_password}" ]; then
    echo "❌ Input missing!"
    echo "Usage: sudo bash script-name.sh <rabbitmq_app_username> <rabbitmq_app_users_password>"
    exit 1
