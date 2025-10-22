@@ -157,10 +157,11 @@ func_golang(){
     go build &>>${log_file}
     func_status_check $?
 
-  func_print_head "Update the password in SystemD service file "
-      sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|" ${script_path}/${component}.service &>>${log_file}
-      sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|" ${script_path}/${component}.service &>>${log_file}
-      func_status_check $?
+  func_print_head "Update RabbitMQ credentials in SystemD service file"
+    sed -i -e "s|^Environment=AMQP_USER=.*|Environment=AMQP_USER=${rabbitmq_app_username}|" \
+        -e "s|^Environment=AMQP_PASS=.*|Environment=AMQP_PASS=${rabbitmq_app_users_password}|" \
+        "${script_path}/${component}.service" &>>${log_file}
+    func_status_check $?
 
 
   func_systemd_setup
@@ -185,7 +186,7 @@ func_python(){
                  "${script_path}/${component}.service" &>>${log_file}
 #     sed -i -e "s|rabbitmq_app_username|${rabbitmq_app_username}|g" ${script_path}/${component}.service &>>${log_file}
 #     sed -i -e "s|rabbitmq_app_users_password|${rabbitmq_app_users_password}|g" ${script_path}/${component}.service &>>${log_file}
-             func_status_check $?
+      func_status_check $?
 
    func_systemd_setup
 
