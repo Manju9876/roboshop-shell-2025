@@ -30,11 +30,11 @@ func_schema_setup(){
       cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
       func_status_check $?
 
-    func_print_head "install mongodb"
+    func_print_head "Install mongodb"
       dnf install mongodb-mongosh -y &>>${log_file}
       func_status_check $?
 
-    func_print_head "connect to schema"
+    func_print_head "Connect to schema"
       mongosh --host mongodb-dev.devopsbymanju.shop </app/db/master-data.js &>>${log_file}
       func_status_check $?
   fi
@@ -54,14 +54,14 @@ func_schema_setup(){
 
 func_app_prereq(){
 
-   func_print_head "create Application  user"
+   func_print_head "Create Application  user"
      id ${app_user} &>>${log_file}
      if [ $? -ne 0 ]; then
       useradd ${app_user} &>>${log_file}
      fi
      func_status_check $?
 
-   func_print_head "delete any existing /app dir and create app directory"
+   func_print_head "Delete any existing /app dir and create app directory"
      rm -rf /app &>>${log_file}
      mkdir /app &>>${log_file}
      func_status_check $?
@@ -96,21 +96,21 @@ func_systemd_setup(){
 
 func_nodejs(){
 
-  func_print_head "disable Node js"
+  func_print_head "Disable Node js"
   dnf module disable nodejs -y &>>${log_file}
   func_status_check $?
 
-  func_print_head "enable Node js version 20"
+  func_print_head "Enable Node js version 20"
   dnf module enable nodejs:20 -y &>>${log_file}
   func_status_check $?
 
-  func_print_head "install Node js"
+  func_print_head "Install Node js"
   dnf install nodejs -y &>>${log_file}
   func_status_check $?
 
   func_app_prereq
 
-  func_print_head "install Node js dependencies"
+  func_print_head "Install Node js dependencies"
   npm install &>>${log_file}
   func_status_check $?
 

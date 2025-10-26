@@ -6,7 +6,7 @@ func_print_head "Copy repo file"
 cp ${script_path}/mongo.repo /etc/yum.repos.d/mongo.repo &>>${log_file}
 func_status_check $?
 
-func_print_head "install mongod "
+func_print_head "Install mongod "
 dnf install mongodb-org -y &>>${log_file}
 func_status_check $?
 
