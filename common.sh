@@ -7,18 +7,18 @@ rm -rf /tmp/roboshop.log
 
 func_print_head(){
 
-  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<\e[0m"
-  echo -e "\e[35m>>>>>>>>>>>>> $1 <<<<<<<<<<<<\e[0m"  &>>${log_file}
+  echo -e "\e[35m$1\e[0m"
+  echo -e "\e[35m$1\e[0m"  &>>${log_file}
 
 }
 
 func_status_check(){
 
     if [ $1 = 0 ]; then
-      echo -e "\e[32mSUCCESS\e[0m"
+      echo -e "\e[32m>> SUCCESS\e[0m"
     else
-      echo -e "\e[31mFAILURE\e[31m"
-      echo -e "\e[31mRefer the /tmp/roboshop.log  file for more information"
+      echo -e "\e[31m>> FAILURE\e[31m"
+      echo -e "\e[31m>> Refer the /tmp/roboshop.log  file for more information"
       exit 1
     fi
 }

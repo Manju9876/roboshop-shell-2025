@@ -25,7 +25,6 @@ func_print_head "Download frontend code "
 
 func_print_head "unzip code "
   cd /usr/share/nginx/html  &>>${log_file}
-  func_status_check $?
   unzip /tmp/frontend.zip  &>>${log_file}
   func_status_check $?
 
@@ -35,7 +34,6 @@ func_print_head "copy nginx configuration file "
 
 func_print_head "start nginx service "
   systemctl enable nginx  &>>${log_file}
-  func_status_check $?
   systemctl restart nginx  &>>${log_file}
   func_status_check $?
 
