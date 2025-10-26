@@ -114,9 +114,10 @@ func_nodejs(){
   npm install &>>${log_file}
   func_status_check $?
 
+  func_systemd_setup
   func_schema_setup
 
-  func_systemd_setup
+
 
 }
 
