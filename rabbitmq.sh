@@ -9,7 +9,7 @@ if [ -z "${rabbitmq_app_username}" ] || [ -z "${rabbitmq_app_users_password}" ];
    exit 1
 fi
 
-func_print_head "copy repo file "
+func_print_head "Copy repo file "
 cp ${script_path}/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo &>>${log_file}
 func_status_check $?
 
@@ -17,12 +17,12 @@ func_print_head "Install rabbitMQ"
 dnf install rabbitmq-server -y &>>${log_file}
   func_status_check $?
 
-func_print_head "enable and start rabbitMQ"
+func_print_head "Enable and start rabbitMQ"
   systemctl enable rabbitmq-server &>>${log_file}
   systemctl restart rabbitmq-server &>>${log_file}
   func_status_check $?
 
-func_print_head "add user and password"
+func_print_head "Add user and password"
   sudo rabbitmqctl list_users | grep roboshop &>>${log_file}
   if [ $? -ne 0 ]; then
     rabbitmqctl add_user ${rabbitmq_app_username} ${rabbitmq_app_users_password} &>>${log_file}
@@ -31,6 +31,6 @@ func_print_head "add user and password"
   fi
     func_status_check $?
 
-func_print_head "set permissions"
+func_print_head "Set permissions"
   rabbitmqctl set_permissions -p / ${rabbitmq_app_username} ".*" ".*" ".*" &>>${log_file}
   func_status_check $?
