@@ -23,12 +23,12 @@ func_print_head "Download frontend code "
   curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip  &>>${log_file}
   func_status_check $?
 
-func_print_head "unzip code "
+func_print_head "Unzip code "
   cd /usr/share/nginx/html  &>>${log_file}
   unzip /tmp/frontend.zip  &>>${log_file}
   func_status_check $?
 
-func_print_head "copy nginx configuration file "
+func_print_head "Copy nginx configuration file "
   cp ${script_path}/nginx.conf /etc/nginx/nginx.conf  &>>${log_file}
   func_status_check $?
 
