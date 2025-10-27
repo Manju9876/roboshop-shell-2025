@@ -11,11 +11,11 @@ func_print_head "Enable nginx version 1.24 "
   dnf module enable nginx:1.24 -y  &>>${log_file}
   func_status_check $?
 
-func_print_head "install nginx "
+func_print_head "Install nginx "
   dnf install nginx -y  &>>${log_file}
   func_status_check $?
 
-func_print_head "remove Nginx data "
+func_print_head "Remove Nginx data "
   rm -rf /usr/share/nginx/html/*  &>>${log_file}
   func_status_check $?
 
