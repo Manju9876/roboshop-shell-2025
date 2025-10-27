@@ -32,7 +32,7 @@ func_print_head "Copy nginx configuration file "
   cp ${script_path}/nginx.conf /etc/nginx/nginx.conf  &>>${log_file}
   func_status_check $?
 
-func_print_head "start nginx service "
+func_print_head "Start nginx service "
   systemctl enable nginx  &>>${log_file}
   systemctl restart nginx  &>>${log_file}
   func_status_check $?
