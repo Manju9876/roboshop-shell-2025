@@ -47,9 +47,9 @@ func_schema_setup(){
       func_status_check $?
 
     func_print_head "connect schemas to the root and with password"
-      mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/schema.sql &>>${log_file}
-      mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/app-user.sql &>>${log_file}
-      mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/master-data.sql &>>${log_file}
+    for file in schema app-user master-data; do
+      mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/${file}.sql &>>${log_file}
+    done
       func_status_check $?
   fi
 }
