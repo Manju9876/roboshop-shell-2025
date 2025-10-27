@@ -16,10 +16,10 @@ func_print_head(){
 func_status_check(){
 
     if [ $1 = 0 ]; then
-      echo -e "\e[32m>> SUCCESS\e[0m"
+      echo -e "\e[32m >> SUCCESS\e[0m"
     else
-      echo -e "\e[31m>> FAILURE\e[31m"
-      echo -e "\e[31m>> Refer the /tmp/roboshop.log  file for more information"
+      echo -e "\e[31m >> FAILURE\e[31m"
+      echo -e "\e[31m >> Refer the /tmp/roboshop.log  file for more information"
       exit 1
     fi
 }
