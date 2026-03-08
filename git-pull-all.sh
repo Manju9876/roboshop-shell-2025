@@ -6,7 +6,7 @@
 # -----------------------------------------
 
 # 📌 Base directory where all repositories are located
-BASE_DIR="/c/manju-devops/devopsbymanju"
+BASE_DIR="/c/manju-devops/devopsmanju"
 
 # 📌 List of repositories to update
 REPOS=(

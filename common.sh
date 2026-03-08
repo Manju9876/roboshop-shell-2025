@@ -37,7 +37,7 @@ func_schema_setup(){
       func_status_check $?
 
     func_print_head "Connect to schema"
-      mongosh --host mongodb-dev.devopsbymanju.shop </app/db/master-data.js &>>${log_file}
+      mongosh --host mongodb-dev.devopsmanju.shop </app/db/master-data.js &>>${log_file}
       func_status_check $?
   fi
 
@@ -48,7 +48,7 @@ func_schema_setup(){
 
     func_print_head "connect schemas to the root and with password"
     for file in schema app-user master-data; do
-      mysql -h mysql-dev.devopsbymanju.shop -uroot -p${mysql_root_password} < /app/db/${file}.sql &>>${log_file}
+      mysql -h mysql-dev.devopsmanju.shop -uroot -p${mysql_root_password} < /app/db/${file}.sql &>>${log_file}
     done
       func_status_check $?
   fi
